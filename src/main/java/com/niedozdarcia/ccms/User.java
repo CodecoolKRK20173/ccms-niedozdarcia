@@ -1,4 +1,4 @@
-package com.Niedozdarcia.ccms;
+package com.niedozdarcia.ccms;
 
 public abstract class User{
     private String email;
