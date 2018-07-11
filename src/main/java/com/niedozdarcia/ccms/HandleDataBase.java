@@ -13,7 +13,7 @@ public interface HandleDataBase {
     HashMap<Date, ArrayList<Student>> getAttendance();
     ArrayList<Employee> getAllEmployee();
     Employee getEmployee(String name);
-    ArrayList<Menager> getAllMenagers();
+    ArrayList<Manager> getAllMenagers();
     Menager getMenager(String name);
     void saveData();
 }
