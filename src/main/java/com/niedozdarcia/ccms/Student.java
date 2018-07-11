@@ -42,7 +42,7 @@ public class Student extends User{
                 String assignment = view.getString("Assignment name?");
                 submitAssignment(assignment);
             }
-            if (inpit == 2){
+            if (input == 2){
                 showAssigments();
             }
         }
