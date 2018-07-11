@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CCms" />
+        <module name="CCMS" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="CCms" target="1.5" />
+      <module name="CCMS" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
