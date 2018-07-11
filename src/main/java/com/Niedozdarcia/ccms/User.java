@@ -37,5 +37,5 @@ public abstract class User{
     public void setSurname(String surname) {
         this.surname = surname;
     }
-    public abstract void activate(View view);
+    public abstract void activate();
 }
