@@ -1,7 +1,8 @@
 package com.niedozdarcia.ccms;
 
+import java.io.Writer;
 import java.util.*;
-
+import com.opencsv.CSVWriter;
 import com.opencsv.CSVReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -9,13 +10,20 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class HandleCsv {
-    private ArrayList<Student> students;
-    private ArrayList<Mentor> mentors;
-    private ArrayList<Employee> employees;
-    private ArrayList<Manager> managers;
+    private List<Student> students;
+    private List<Mentor> mentors;
+    private List<Employee> employees;
+    private List<Manager> managers;
     private Map<String, ArrayList<String>> attendance;
-    private ArrayList<String> assignments;
-
+    private List<String> assignments;
+    private ArrayList<String[]> assToSave;
+    private ArrayList<String[]> attToSave;
+    private ArrayList<String[]> studToSave;
+    private ArrayList<String[]> mentsToSave;
+    private ArrayList<String[]> empsToSave;
+    private ArrayList<String[]> manToSave;
+    private ArrayList<ArrayList<String[]>> packedData;
+    private ArrayList<String> packedFilePaths;
     private String studentFilePath = HandleCsv.class.getResource("/users/students.csv").getPath();
     private String mentorsFilePath = HandleCsv.class.getResource("/users/mentors.csv").getPath();
     private String employeFilePath = HandleCsv.class.getResource("/users/employees.csv").getPath();
@@ -32,6 +40,29 @@ public class HandleCsv {
         loadManagers();
     }
 
+    private void CSVWriter( ) {
+        int i = 0;
+        for (ArrayList<String[]> dataSet : packedData){
+        String currentFilePath = packedFilePaths.get(i);
+            try {
+            Writer writer = Files.newBufferedWriter(Paths.get(currentFilePath));
+
+            CSVWriter csvWriter = new CSVWriter(writer,
+                    CSVWriter.DEFAULT_SEPARATOR,
+                    CSVWriter.NO_QUOTE_CHARACTER,
+                    CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                    CSVWriter.DEFAULT_LINE_END);
+
+            for (String[] record : dataSet) {
+                csvWriter.writeNext(record);
+            }
+
+        i++;
+        } catch (IOException e) {
+            System.out.print(e);
+        }
+
+    }}
     private List<String[]> CSVReader(String filePath) {
         List<String[]> records = new ArrayList<>();
         try {
@@ -45,6 +76,7 @@ public class HandleCsv {
     }
 
     private void loadStudents(){
+        students = new ArrayList<>();
         List<String[]> studentList = CSVReader(studentFilePath);
         for (String[] record: studentList){
             LinkedHashMap<String, String> studentsAssignments = prepareStudentAssignments(record);
@@ -62,6 +94,7 @@ public class HandleCsv {
     }
 
     private void loadAssignments(){
+        assignments = new ArrayList<>();
         List<String[]> assignmentList = CSVReader(assignmentsFilePath);
         for(String[] record : assignmentList){
             assignments.add(record[0]);
@@ -69,6 +102,7 @@ public class HandleCsv {
     }
 
     private void loadMentors(){
+        mentors = new ArrayList<>();
         List<String[]> mentorsList = CSVReader(mentorsFilePath);
         for (String[] record : mentorsList){
             mentors.add(new Mentor(record[0], record[1], record[2], record[3], students, assignments));
@@ -76,6 +110,7 @@ public class HandleCsv {
     }
 
     private void loadAttendance(){
+        attendance = new HashMap<>();
         List<String[]> attendanceList = CSVReader(attendanceFilePath);
         for (String[] record : attendanceList){
             ArrayList<String> studentsAttendance = prepareAttendanceList(record);
@@ -92,6 +127,7 @@ public class HandleCsv {
     }
 
     private void loadEmployees(){
+        employees = new ArrayList<>();
         List<String[]> employeesList = CSVReader(employeFilePath);
         for (String[] record : employeesList){
             employees.add(new Employee(record[0], record[1], record[2], record[3], students);
@@ -99,34 +135,92 @@ public class HandleCsv {
     }
 
     private void loadManagers(){
+        managers = new ArrayList<>();
         List<String[]> managersList = CSVReader(managersFilePath);
         for (String[] record : managersList){
             managers.add(new Manager(record[0], record[1], record[2], record[3], students, mentors, employees, assignments));
         }
     }
+
+    public void saveData(){
+        prepareAssignmentsForSaving();
+        prepareAttendanceForSaving();
+        prepareStudentsForSaving();
+        prepareEmployeesForSaving();
+        packData();
+        packFilePaths();
+        CSVWriter();
     }
 
-    public ArrayList<Student> getStudents() {
+    private void prepareAssignmentsForSaving(){
+        for (String assingment : assignments){
+            String[] preparedString = new String[1];
+            preparedString[0] = assingment;
+            assToSave.add(preparedString);
+        }
+    }
+
+    private void  prepareAttendanceForSaving(){
+        for (String day : attendance.keySet()){
+            String[] preparedString = prepareArray(day);
+            attToSave.add(preparedString);
+        }
+    }
+
+    private String[] prepareArray(String day){
+        String[] preparedString = new String[attendance.get(day).size()+1];
+        preparedString[0] = day;
+        int i = 1;
+        for (String student : attendance.get(day)){
+            preparedString[i] = student;
+            i++;
+        }
+    }
+
+    private void prepareStudentsForSaving(){
+        for (Student student : students){
+            String[] preparedString = new String[4 + assignments.size()];
+            preparedString[0] = student.getEmail();
+            preparedString[1] = student.getPassword();
+            preparedString[2] = student.getName();
+            preparedString[3] = student.getSurname();
+            int i = 4;
+            for (String assignment : assignments){
+                preparedString[i] = assignment;
+                i++;
+            }
+            studToSave.add(preparedString);
+        }
+    }
+
+    private void prepareEmployeesForSaving(){
+        for (Mentor mentor : mentors){
+            String[] preparedString = new String[4];
+            preparedString[1] = mentor.getEmail();
+        }
+    }
+
+    public List<Student> getStudents() {
         return students;
     }
 
-    public ArrayList<Mentors> getMentors() {
+    public List<Mentor> getMentors() {
         return mentors;
     }
 
-    public ArrayList<Employee> getEmployees() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 
-    public ArrayList<Manager> getManagers() {
+    public List<Manager> getManagers() {
         return managers;
     }
 
-    public HashMap<Date, ArrayList<Student>> getAttendance() {
+    public Map<String, ArrayList<String>> getAttendance() {
         return attendance;
     }
 
-    public ArrayList<String> getAssignments() {
+    public List<String> getAssignments() {
         return assignments;
     }
 }
