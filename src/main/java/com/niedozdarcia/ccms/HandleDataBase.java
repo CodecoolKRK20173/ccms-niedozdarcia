@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public interface HandleDataBase {
-    ArrayList<Students> getAllStudents();
+    ArrayList<Student> getAllStudents();
     Student getStudent(String name);
     ArrayList<Mentor> getAllMentors();
     Mentor getMentor(String name);
@@ -14,7 +14,7 @@ public interface HandleDataBase {
     ArrayList<Employee> getAllEmployee();
     Employee getEmployee(String name);
     ArrayList<Manager> getAllMenagers();
-    Menager getMenager(String name);
+    Manager getMenager(String name);
     void saveData();
 }
 
