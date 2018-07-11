@@ -31,19 +31,19 @@ public class Manager extends User {
 
 
     private void addMentor() {
-        String emile = getView().getInput();
-        String password = getView().getInput();
-        String name = getView().getInput();
-        String surname = getView().getInput();
+        String emile = getView().getInputString("Enter email: ");
+        String password = getView().getInputString("Enter password: ");
+        String name = getView().getInputstring("Enter name: ");
+        String surname = getView().getInputString("Enter surname: ");
         mentors.add(new Mentor(email, password, name, surname, students, assigments));
     }
 
 
     private void addEmpoloyee() {
-        String emile = getView().getInput();
-        String password = getView().getInput();
-        String name = getView().getInput();
-        String surname = getView().getInput();
+        String emile = getView().getInputString("Enter email: ");
+        String password = getView().getInputString("Enter password: ");
+        String name = getView().getInputstring("Enter name: ");
+        String surname = getView().getInputString("Enter surname: ");
         employees.add(new Employee(email, password, name, surname, students));
     }
 
@@ -52,7 +52,7 @@ public class Manager extends User {
         String usersTable = "";
 
         for (int index = 0; i < users.size(); index++) {
-            usersTable += String.format("%d. %s %s: %s\n", ++index, user.getName(),
+            usersTable += String.format("%d. %s %s: %s\n", ++index, user.get(index).getName(),
             user.getSurname(), user.getEmail());
         }
         return usersTable;
@@ -75,22 +75,22 @@ public class Manager extends User {
 
     private void removeMentor() {
         showMentors();
-        int index = getView().getInputInt("Enter index of mentor who you want to remove.");
-        getView().getInputInt("Mentor %s removed", mentors.get(index).getName());
+        int index = getView().getInputInt("Enter index of mentor who you want to remove: ");
+        getView().getInputInt("Mentor %s %s removed", mentors.get(index).getName(), mentors.get(index).getSurname());
         mentors.remove(index);
 
     }
 
     private void removeEmployee() {
         showEmployees();
-        int index = getView().getInputInt("Enter index of employee who you want to remove.");
-        getView().getInputInt("Employee %s removed", mentors.get(index).getName());
+        int index = getView().getInputInt("Enter index of employee who you want to remove: ");
+        getView().getInputInt("Employee %s %s removed", employees.get(index).getName(),employees.get(index).getSurname() );
         employees.remove(index);
     }
 
 
     private void editData(List<User> users) {
-        int index = getView().getInputInt("Enter index of person who you want to edit.");
+        int index = getView().getInputInt("Enter index of person who you want to edit: ");
 
         boolean isFinish = false;
         while (!isFinish) {
@@ -128,7 +128,7 @@ public class Manager extends User {
                     break;
 
                 default:
-                    getView().print("There is not that option");
+                    getView().print("There is not that option.");
             }
         }
     }
