@@ -48,16 +48,6 @@ public class Manager extends User {
     }
 
 
-    private String makeTable(List<User> users) {
-        String usersTable = "";
-
-        for (int index = 0; i < users.size(); index++) {
-            usersTable += String.format("%d. %s %s: %s\n", ++index, users.get(index).getName());
-            users.get(index).getSurname(), users.get(index).getEmail());
-        }
-        return usersTable;
-    }
-
 
     private void showMentors() {
         String mentorsTable = "";
