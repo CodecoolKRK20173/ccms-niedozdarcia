@@ -6,7 +6,11 @@ public class Student extends User{
     private HashMap<String,String> assignments;
 
     public Student (String email, String password, String name, String surname, HashMap<String, String> assignments, View view){
-        super(email, password, name, surname, view);
+        setEmail(email);
+        setPassword(password);
+        setName(name);
+        setSurname(surname);
+        setView(View);
         this.assignments = assignments;
     }
 
@@ -37,6 +41,9 @@ public class Student extends User{
                 showAssigments();
                 String assignment = view.getString("Assignment name?");
                 submitAssignment(assignment);
+            }
+            if (inpit == 2){
+                showAssigments();
             }
         }
 
