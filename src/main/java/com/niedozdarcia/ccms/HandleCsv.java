@@ -1,17 +1,19 @@
 package com.niedozdarcia.ccms;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import com.opencsv.CSVReader;
+import java.util.*;
 
+import com.opencsv.CSVReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class HandleCsv {
     private ArrayList<Student> students;
     private ArrayList<Mentors> mentors;
     private ArrayList<Employee> employees;
     private ArrayList<Manager> managers;
-    private HashMap<Date, ArrayList<Student>> attendance;
+    private Map<String, ArrayList<String>> attendance;
     private ArrayList<String> assignments;
 
     private String studentFilePath = HandleCsv.class.getResource("/users/students.csv").getPath();
@@ -22,14 +24,72 @@ public class HandleCsv {
     private String assignmentsFilePath = HandleCsv.class.getResource("/users/assignments.csv").getPath();
 
     public HandleCsv(){
+        loadAssignments();
+        loadAttendance();
         loadStudents();
         loadMentors();
         loadEmployees();
         loadManagers();
-        loadAssignments();
     }
 
-    private ();
+    private List<String[]> CSVReader(String filePath) {
+        List<String[]> records = new ArrayList<String[]>();
+        try {
+            Reader reader = Files.newBufferedReader(Paths.get(filePath));
+            CSVReader csvReader = new CSVReader(reader);
+            records = csvReader.readAll();
+        } catch (IOException e){
+            System.out.print(e);
+        }
+        return records;
+    }
+
+    private void loadStudents(){
+        List<String[]> studentList = CSVReader(studentFilePath);
+        for (String[] record: studentList){
+            LinkedHashMap<String, String> studentsAssignments = prepareStudentAssignments(record);
+            students.add(new Student(record[0], record[1], record[2], record[3], studentsAssignments));
+        }
+    }
+
+    private LinkedHashMap<String, String> prepareStudentAssignments(String[] data){
+        LinkedHashMap<String, String> studentsAssignments = new LinkedHashMap<>();
+        for (int i = 4, n = data.length -1 ; i<n; i++){
+            studentsAssignments.put(data[i].substring(0, data[i].length() - 2),
+                    data[i].substring(data[i].length() - 2, data[i].length() - 1));
+        }
+        return  studentsAssignments;
+    }
+
+    private void loadAssignments(){
+        List<String[]> assignmentList = CSVReader(assignmentsFilePath);
+        for(String[] record : assignmentList){
+            assignments.add(record[0]);
+        }
+    }
+
+    private void loadMentors(){
+        List<String[]> mentorsList = CSVReader(mentorsFilePath);
+        for (String[] record : mentorsList){
+            mentors.add(new Mentor(record[0], record[1], record[2], record[3], students, assignments));
+        }
+    }
+
+    private void loadAttendance(){
+        List<String[]> attendanceList = CSVReader(attendanceFilePath);
+        for (String[] record : attendanceList){
+            ArrayList<String> studentsAttendance = prepareAttendanceList(record);
+            attendance.put(record[0], studentsAttendance);
+        }
+    }
+
+    private ArrayList<String> prepareAttendanceList(String[] record){
+        ArrayList<String> studentsAttendance = new ArrayList<>();
+        for (int i = 1, n = record.length - 1; i<n; i++){
+            studentsAttendance.add(record[i]);
+        }
+        return  studentsAttendance;
+    }
 
     public ArrayList<Student> getStudents() {
         return students;
