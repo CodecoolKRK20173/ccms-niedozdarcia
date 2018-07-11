@@ -17,10 +17,10 @@ public class View {
 
     public int getInputInt(String text) {
         System.out.print(text);
-        int input = 0;
+        int input = -1;
 
 
-        while (input == 0) {
+        while (input < 0) {
 
             try {
                 input = Integer.parseInt(scanner.nextLine());
