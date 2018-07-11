@@ -64,7 +64,7 @@ public class Manager extends User {
             usersTable += String.format("%d. %s %s: %s\n", ++index, employees.get(index).getName());
             employees.get(index).getSurname(), employees.get(index).getEmail());
         }
-        getView().print(mentorsTable);
+        getView().print(employeesTable);
     }
 
 
@@ -74,7 +74,7 @@ public class Manager extends User {
             usersTable += String.format("%d. %s %s: %s\n", ++index, students.get(index).getName());
             students.get(index).getSurname(), students.get(index).getEmail());
         }
-        getView().print(mentorsTable);
+        getView().print(studentsTable);
     }
 
 
