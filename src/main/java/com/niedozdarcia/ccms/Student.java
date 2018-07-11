@@ -10,40 +10,39 @@ public class Student extends User{
         setPassword(password);
         setName(name);
         setSurname(surname);
-        setView(View);
         this.assignments = assignments;
     }
 
     public void addAssignment(String assignment){
-        assignments.put(assignment.substring(0, str.length() - 1); assignment.charAt(assignment.length() - 1));
+        assignments.put(assignment.substring(0, assignment.length() - 1), assignment.substring(assignment.length() - 2, assignment.length() - 1));
     }
 
     private void submitAssignment(String assignment){
         if (assignments.get(assignment).equals("x")){ // x - task not commited.
-            assignments.get(assignment) = "0";
+            assignments.put(assignment, "0");
         }
     }
 
-    private void showAssigments(){
-        View.showAssigments(assignments);
+    private void showAssigments(View view){
+        view.showAssigments(assignments);
     }
 
     public void changeAssignmentStatus(String assignment, String mark){
         assignments.get(assignment) = mark;
     }
 
-    public void activate(){
+    public void activate(View view){
         int input = 5;
-        while(!input == 0){
+        while(!(input == 0)){
             view.printStudentMenu();
             input = view.getInput();
             if (input == 1){
-                showAssigments();
+                showAssigments(view);
                 String assignment = view.getString("Assignment name?");
                 submitAssignment(assignment);
             }
             if (input == 2){
-                showAssigments();
+                showAssigments(view);
             }
         }
 
