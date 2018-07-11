@@ -58,7 +58,7 @@ public class Mentor extends User {
                     removeStudent();
                     break;
                 case 4:
-                    // TODO: edit student method
+                    editStudent();
                 case 5:
                     // TODO: show assignments method
                 case 6:
@@ -124,12 +124,50 @@ public class Mentor extends User {
         String confirm = "";
 
         while (!confirm.equals("y") || !confirm.equals("n")) {
-            String message = String.format("Are you sure you want to remove %s %s from system? (y/n): ", student.getName(), student.getSurname());
+            String message = String.format("Are you sure you want to remove %s %s from system? (y/n): ",
+                    student.getName(),
+                    student.getSurname());
             confirm = getView().getInputString(message);
         }
 
         if (confirm.equals("y")) {
             this.students.remove(i);
+        }
+    }
+
+    private void editStudent() {
+
+        Student student = null;
+
+        while (student == null) {
+
+            showStudents();
+            int i = getView().getInputInt("Enter number of student you wish to edit: ");
+
+            try {
+                student =  this.students.get(i);
+            } catch (IndexOutOfBoundsException e) {
+                getView().print("No such number");
+            }
+        }
+
+        getView().printMenu("Go back", "Change name", "Change surname", "Change email address", "Change password");
+        int choice = getView().getInputInt("Enter number: ");
+
+        switch (choice) {
+
+            case 1:
+                student.setName(getView().getInputString("Enter new name: "));
+                break;
+            case 2:
+                student.setSurname(getView().getInputString("Enter new surname: "));
+                break;
+            case 3:
+                student.setEmail(getView().getInputString("Enter new email address: "));
+                break;
+            case 4:
+                student.setPassword(getView().getInputString("Enter new password: "));
+                break;
         }
     }
 
