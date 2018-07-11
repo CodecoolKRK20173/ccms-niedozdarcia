@@ -60,16 +60,31 @@ public class Manager extends User {
 
 
     private void showMentors() {
-        getView().print(makeTable(mentors));
+        String mentorsTable = "";
+        for (int index = 0; i < mentors.size(); index++) {
+            usersTable += String.format("%d. %s %s: %s\n", ++index, mentors.get(index).getName());
+            mentors.get(index).getSurname(), mentors.get(index).getEmail());
+        }
+        getView().print(mentorsTable);
     }
 
     private void showEmployees() {
-        getView().print(makeTable(employees));
+        String employeesTable = "";
+        for (int index = 0; i < employees.size(); index++) {
+            usersTable += String.format("%d. %s %s: %s\n", ++index, employees.get(index).getName());
+            employees.get(index).getSurname(), employees.get(index).getEmail());
+        }
+        getView().print(mentorsTable);
     }
 
 
     private void showStudents() {
-        getView().print(makeTable(students));
+        String studentsTable = "";
+        for (int index = 0; i < students.size(); index++) {
+            usersTable += String.format("%d. %s %s: %s\n", ++index, students.get(index).getName());
+            students.get(index).getSurname(), students.get(index).getEmail());
+        }
+        getView().print(mentorsTable);
     }
 
 
