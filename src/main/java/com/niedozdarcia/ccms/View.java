@@ -35,4 +35,16 @@ public class View {
     public void print(String text) {
         System.out.println(text);
     }
+
+    public void printMenu(String... items) {
+
+        System.out.println("What would you like to do:");
+
+        for (int i=0; i<items.length; i++) {
+            System.out.printf("    (%d) %s", i, item);
+            i++;
+        }
+
+        System.out.printf("    (0)%s", items[0]);
+    }
 }
