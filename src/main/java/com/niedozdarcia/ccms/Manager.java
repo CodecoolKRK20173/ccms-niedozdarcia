@@ -19,7 +19,7 @@ public class Manager extends User {
                    ArrayList<Employee> employees,
                    ArrayList<String> assigments) {
 
-        setName(name);
+        setEmail(email);
         setPassword(password);
         setName(name);
         setSurname(surname);
@@ -30,23 +30,20 @@ public class Manager extends User {
     }
 
 
-
-    private void getDataFromUser(){
+    private void addMentor() {
         String emile = getView().getInput();
         String password = getView().getInput();
         String name = getView().getInput();
         String surname = getView().getInput();
-    }
-
-
-    private void addMentor() {
-        getDataFromUser();
         mentors.add(new Mentor(email, password, name, surname, students, assigments));
     }
 
 
     private void addEmpoloyee() {
-        getDataFromUser();
+        String emile = getView().getInput();
+        String password = getView().getInput();
+        String name = getView().getInput();
+        String surname = getView().getInput();
         employees.add(new Employee(email, password, name, surname, students));
     }
 
