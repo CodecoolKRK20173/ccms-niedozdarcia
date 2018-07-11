@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 
 public class HandleCsv {
     private ArrayList<Student> students;
-    private ArrayList<Mentors> mentors;
+    private ArrayList<Mentor> mentors;
     private ArrayList<Employee> employees;
     private ArrayList<Manager> managers;
     private Map<String, ArrayList<String>> attendance;
@@ -33,7 +33,7 @@ public class HandleCsv {
     }
 
     private List<String[]> CSVReader(String filePath) {
-        List<String[]> records = new ArrayList<String[]>();
+        List<String[]> records = new ArrayList<>();
         try {
             Reader reader = Files.newBufferedReader(Paths.get(filePath));
             CSVReader csvReader = new CSVReader(reader);
@@ -89,6 +89,21 @@ public class HandleCsv {
             studentsAttendance.add(record[i]);
         }
         return  studentsAttendance;
+    }
+
+    private void loadEmployees(){
+        List<String[]> employeesList = CSVReader(employeFilePath);
+        for (String[] record : employeesList){
+            employees.add(new Employee(record[0], record[1], record[2], record[3], students);
+        }
+    }
+
+    private void loadManagers(){
+        List<String[]> managersList = CSVReader(managersFilePath);
+        for (String[] record : managersList){
+            managers.add(new Manager(record[0], record[1], record[2], record[3], students, mentors, employees, assignments));
+        }
+    }
     }
 
     public ArrayList<Student> getStudents() {
