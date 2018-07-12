@@ -3,7 +3,7 @@ package com.niedozdarcia.ccms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MentorsCSVDAO extends  CSVHandler {
+public class MentorsCSVDAO extends  CSVHandler implements MentorsDAO {
     private List<Mentor> mentors;
     private List<Student> students;
     private List<String> assignments;
