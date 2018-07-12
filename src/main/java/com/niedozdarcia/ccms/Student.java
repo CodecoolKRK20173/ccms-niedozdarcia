@@ -34,12 +34,16 @@ public class Student extends User{
         assignments.put(assignment, mark);
     }
 
+    public Map<String, String> getAssignments() {
+        return assignments;
+    }
+
     public void activate(View view){
         setView(view);
         int input = 5;
         while(!(input == 0)){
             view.printMenu("Exit", "SubmitAssignment", "ShowAssignment");
-            input = view.getInputInt("Pick option");
+            input = view.getInputInt(0,2);
             if (input == 1){
                 showAssigments(view);
                 String assignment = view.getInputString("Assignment name?");
