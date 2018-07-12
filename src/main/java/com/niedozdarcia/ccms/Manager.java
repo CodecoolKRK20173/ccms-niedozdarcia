@@ -6,10 +6,10 @@ import java.util.List;
 public class Manager extends User {
 
 
-    List<Student> students;
-    List<Mentor> mentors;
-    List<Employee> employees;
-    List<String> assigments;
+    private List<Student> students;
+    private List<Mentor> mentors;
+    private List<Employee> employees;
+    private List<String> assigments;
 
     public Manager(String email,
                    String password,
