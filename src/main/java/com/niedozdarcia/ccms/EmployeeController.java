@@ -1,11 +1,21 @@
 package com.niedozdarcia.ccms;
 
+import java.util.List;
+
 public class EmployeeController implements Controller {
 
-    Employee employee;
-    View view;
+    private Employee employee;
+    private View view;
 
     public EmployeeController(String email) {
+        List<Employee> employees = new EmployessCSVDAO().getEmployees();
+
+        for (Employee employee : employees) {
+            if (employee.getEmail().equals(email)) {
+                this.employee = employee;
+                break;
+            }
+        }
 
     }
 
@@ -24,10 +34,10 @@ public class EmployeeController implements Controller {
 
         boolean isFinish = false;
         while (!isFinish) {
-            getView().printMenu("Exit",
+            view.printMenu("Log out",
                     "List of students");
 
-            int choice = getView().getInputInt(0,1);
+            int choice = view.getInputInt(0,1);
 
             switch (choice) {
                 case 0:
