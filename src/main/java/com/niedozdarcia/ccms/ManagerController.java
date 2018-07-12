@@ -8,10 +8,15 @@ public class ManagerController implements Controller {
     View view;
     
     public ManagerController(String email) {
-        
-    }
+        List<Manager> managers = new ManagersCSVDAO().getManagers();
 
-    
+        for (Manager manager : managers) {
+            if (manager.getEmail().equals(email)) {
+                this.manager = manager;
+                break;
+            }
+        }
+    }
 
 
     private void addMentor() {
@@ -19,7 +24,7 @@ public class ManagerController implements Controller {
         String password = view.getInputString("Enter password: ");
         String name = view.getInputString("Enter name: ");
         String surname = view.getInputString("Enter surname: ");
-        manager.getMentors().add(new Mentor(email, password, name, surname, manager.getStudents(), manager.getAssigments()));
+        manager.getMentors().add(new Mentor(email, password, name, surname, manager.getStudents(), manager.getAssignments()));
     }
 
 
@@ -141,7 +146,7 @@ public class ManagerController implements Controller {
 
         boolean isFinish = false;
         while (!isFinish) {
-            view.printMenu("Exit",
+            view.printMenu("Log out",
                     "Add mentor",
                     "Remove mentor",
                     "Edit mentor's data",
