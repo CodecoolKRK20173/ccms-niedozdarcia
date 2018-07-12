@@ -1,4 +1,4 @@
-package com.niedozdarcia.DAOS;
+package com.niedozdarcia.ccms;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;

@@ -1,4 +1,4 @@
-package com.niedozdarcia.DAOS;
+package com.niedozdarcia.ccms;
 
 import java.util.List;
 
