@@ -28,6 +28,7 @@ public abstract class CSVHandler implements DataBaseHandler {
     }
 
     public void save(){
+                recordToSave = new ArrayList<>();
                 prepareDataToSave();
                 try {
                     Writer writer = Files.newBufferedWriter(Paths.get(filePath));
