@@ -14,7 +14,11 @@ public class Student extends User{
     }
 
     public Map<String, String> getAssignments() {
-        return assignments;
+        return this.assignments;
+    }
+
+    public void changeAssignmentStatus(String assignment, String mark) {
+        this.assignments.replace(assignment, mark);
     }
 
 }

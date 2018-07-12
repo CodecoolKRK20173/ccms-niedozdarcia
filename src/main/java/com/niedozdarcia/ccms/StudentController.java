@@ -29,14 +29,10 @@ public class StudentController implements Controller {
 
         String assignment = assignmentsList.get(index);
 
-        changeAssignmentStatus(assignment, "0");
+        this.student.changeAssignmentStatus(assignment, "0");
 
     }
 
-
-    private void changeAssignmentStatus(String assignment, String mark) {
-        student.getAssignments().replace(assignment, mark);
-    }
     private ArrayList<String> putAssignmentToList(){
         ArrayList<String> assignmentList = new ArrayList<>();
         for (String key : student.getAssignments().keySet()) {
