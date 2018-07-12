@@ -26,7 +26,7 @@ public class MentorController implements Controller {
     public void activate(View view) {
         this.view = view;
         boolean isLogged = true;
-        int choice = 0;
+        int choice;
 
         while (isLogged) {
 
@@ -228,10 +228,6 @@ public class MentorController implements Controller {
             present = view.getInputString(String.format("Is %s present? (y/n): ", studentFullName));
         }
 
-        if (present.equals("y")) {
-            return true;
-        } else {
-            return false;
-        }
+        return present.equals("y");
     }
 }
