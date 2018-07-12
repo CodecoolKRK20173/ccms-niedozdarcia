@@ -9,7 +9,7 @@ public class Manager extends User {
     private List<Student> students;
     private List<Mentor> mentors;
     private List<Employee> employees;
-    private List<String> assigments;
+    private List<String> assignments;
 
     public Manager(String email,
                    String password,
@@ -18,7 +18,7 @@ public class Manager extends User {
                    List<Student> students,
                    List<Mentor> mentors,
                    List<Employee> employees,
-                   List<String> assigments) {
+                   List<String> assignments) {
 
         setEmail(email);
         setPassword(password);
@@ -27,7 +27,7 @@ public class Manager extends User {
         this.students = students;
         this.mentors = mentors;
         this.employees = employees;
-        this.assigments = assigments;
+        this.assignments = assignments;
     }
 
 
@@ -37,7 +37,7 @@ public class Manager extends User {
 
 
     public List<String> getAssigments() {
-        return assigments;
+        return assignments;
     }
 
 
