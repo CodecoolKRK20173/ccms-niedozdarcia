@@ -23,7 +23,6 @@ public class Mentor extends User {
         setSurname(surname);
         this.students = students;
         this.assignments = assignments;
-        this.attendance = attendance;
     }
 
     public List<Student> getStudents() {
