@@ -2,13 +2,14 @@ package com.niedozdarcia.ccms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AttendanceCSVDao extends CSVHandler {
-    private Map<String, ArrayList<String>> attendance;
+    private Map<String, List<String>> attendance;
 
     public AttendanceCSVDao() {
-        setFilePath(HandleCsv.class.getResource("/users/attendance.csv").getPath());
+        setFilePath(AttendanceCSVDao.class.getResource("/users/attendance.csv").getPath());
         load();
         prepareData();
     }
@@ -49,7 +50,7 @@ public class AttendanceCSVDao extends CSVHandler {
     }
 
 
-    public Map<String, ArrayList<String>> getAttendance() {
+    public Map<String, List<String>> getAttendance() {
         return attendance;
     }
 }
