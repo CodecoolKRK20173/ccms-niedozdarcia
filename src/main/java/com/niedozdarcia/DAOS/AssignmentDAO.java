@@ -1,9 +1,0 @@
-package com.niedozdarcia.DAOS;
-
-import java.util.List;
-
-public interface AssignmentDAO {
-    void prepareData();
-    void prepareDataToSave();
-    List<String> getAssignments();
-}
