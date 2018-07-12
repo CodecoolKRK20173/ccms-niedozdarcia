@@ -8,9 +8,14 @@ public class MentorController implements Controller {
 
     private View view;
     private Mentor mentor;
+    private MentorsCSVDAO mentorsDAO;
+    private AttendanceCSVDao attendanceDAO;
 
     public MentorController(String email) {
-        List<Mentor> mentors = new MentorsCSVDAO().getMentors();
+        mentorsDAO = new MentorsCSVDAO();
+        attendanceDAO = new AttendanceCSVDao();
+
+        List<Mentor> mentors = mentorsDAO.getMentors();
 
         for (Mentor mentor: mentors) {
             if (mentor.getEmail().equals(email)) {
@@ -19,7 +24,7 @@ public class MentorController implements Controller {
             }
         }
 
-        mentor.setAttendance(new AttendanceCSVDao().getAttendance());
+        mentor.setAttendance(attendanceDAO.getAttendance());
     }
 
     @Override
@@ -46,7 +51,9 @@ public class MentorController implements Controller {
             switch (choice) {
 
                 case 0:
-                    // TODO: log out
+                    isLogged = false;
+                    mentorsDAO.save();
+                    attendanceDAO.save();
                 case 1:
                     showStudents();
                     break;
