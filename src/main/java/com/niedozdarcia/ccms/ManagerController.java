@@ -68,7 +68,7 @@ public class ManagerController implements Controller {
 
     private void removeMentor() {
         showMentors();
-        view.print("Enter index of mentor who you want to edit: ");
+        view.print("Enter index of mentor who you want to remove: ");
         int index = view.getInputInt(1, manager.getMentors().size());
         view.print(String.format("Mentor %s %s removed.", manager.getMentor(index).getName(), manager.getMentor(index).getSurname()));
         manager.getMentors().remove(index);
