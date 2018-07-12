@@ -15,13 +15,7 @@ public class HandleCsv {
     private List<Employee> employees;
     private List<Manager> managers;
     private Map<String, ArrayList<String>> attendance;
-    private List<String> assignments;
-    private ArrayList<String[]> assToSave;
-    private ArrayList<String[]> attToSave;
-    private ArrayList<String[]> studToSave;
-    private ArrayList<String[]> mentsToSave;
-    private ArrayList<String[]> empsToSave;
-    private ArrayList<String[]> manToSave;
+    private List<String> assignments
     private ArrayList<ArrayList<String[]>> packedData;
     private ArrayList<String> packedFilePaths;
     private String studentFilePath = HandleCsv.class.getResource("/users/students.csv").getPath();
@@ -62,7 +56,8 @@ public class HandleCsv {
             System.out.print(e);
         }
 
-    }}
+    }
+    }
     private List<String[]> CSVReader(String filePath) {
         List<String[]> records = new ArrayList<>();
         try {
@@ -146,25 +141,34 @@ public class HandleCsv {
         prepareAssignmentsForSaving();
         prepareAttendanceForSaving();
         prepareStudentsForSaving();
+        prepareMentorsForSaving();
         prepareEmployeesForSaving();
-        packData();
-        packFilePaths();
+        prepareManagersForSaving();
         CSVWriter();
     }
 
+    private void packData(ArrayList<String[]> preparedData, String filePath){
+        packedData.add(preparedData);
+        packedFilePaths.add(filePath);
+    }
+
     private void prepareAssignmentsForSaving(){
+        ArrayList<String[]> preparedData = new ArrayList<>();
         for (String assingment : assignments){
             String[] preparedString = new String[1];
             preparedString[0] = assingment;
-            assToSave.add(preparedString);
+            preparedData.add(preparedString);
         }
+        packData(preparedData, assignmentsFilePath);
     }
 
     private void  prepareAttendanceForSaving(){
+        ArrayList<String[]> preparedData = new ArrayList<>();
         for (String day : attendance.keySet()){
             String[] preparedString = prepareArray(day);
-            attToSave.add(preparedString);
+            preparedData.add(preparedString);
         }
+        packData(preparedData, attendanceFilePath);
     }
 
     private String[] prepareArray(String day){
@@ -178,6 +182,7 @@ public class HandleCsv {
     }
 
     private void prepareStudentsForSaving(){
+        ArrayList<String[]> preparedData = new ArrayList<>();
         for (Student student : students){
             String[] preparedString = new String[4 + assignments.size()];
             preparedString[0] = student.getEmail();
@@ -189,15 +194,48 @@ public class HandleCsv {
                 preparedString[i] = assignment;
                 i++;
             }
-            studToSave.add(preparedString);
+            preparedData.add(preparedString);
         }
+        packData(preparedData, studentFilePath);
     }
 
-    private void prepareEmployeesForSaving(){
+    private void prepareMentorsForSaving(){
+        ArrayList<String[]> preparedData = new ArrayList<>();
         for (Mentor mentor : mentors){
             String[] preparedString = new String[4];
             preparedString[1] = mentor.getEmail();
+            preparedString[2] = mentor.getPassword();
+            preparedString[3] = mentor.getName();
+            preparedString[4] = mentor.getSurname();
+            preparedData.add(preparedString);
         }
+        packData(preparedData, mentorsFilePath);
+    }
+
+    private void prepareEmployeesForSaving(){
+        ArrayList<String[]> preparedData = new ArrayList<>();
+        for (Employee employee : employees){
+            String[] preparedString = new String[4];
+            preparedString[1] = employee.getEmail();
+            preparedString[2] = employee.getPassword();
+            preparedString[3] = employee.getName();
+            preparedString[4] = employee.getSurname();
+            preparedData.add(preparedString);
+        }
+        packData(preparedData, employeFilePath);
+    }
+
+    private void prepareManagersForSaving(){
+        ArrayList<String[]> preparedData = new ArrayList<>();
+        for (Manager manager : managers){
+            String[] preparedString = new String[4];
+            preparedString[1] = manager.getEmail();
+            preparedString[2] = manager.getPassword();
+            preparedString[3] = manager.getName();
+            preparedString[4] = manager.getSurname();
+            preparedData.add(preparedString);
+        }
+        packData(preparedData, managersFilePath);
     }
 
     public List<Student> getStudents() {
