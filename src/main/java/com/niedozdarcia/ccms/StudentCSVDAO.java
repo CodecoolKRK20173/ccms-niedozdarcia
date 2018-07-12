@@ -8,7 +8,7 @@ public class StudentCSVDAO extends  CSVHandler{
     private List<Student> students;
 
     public StudentCSVDAO(){
-        setFilePath(HandleCsv.class.getResource("/users/students.csv").getPath());
+        setFilePath(StudentCSVDAO.class.getResource("/users/students.csv").getPath());
         load();
         prepareData();
     }

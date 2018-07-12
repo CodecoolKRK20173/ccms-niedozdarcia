@@ -9,6 +9,7 @@ public class Main {
     View view = new View();
     int option = 0;
     while (!(option ==0)){
+        Controller controller;
         view.printMenu("Logout", "Login");
         option = view.getInputInt(0,1);
         if (option == 1){
@@ -21,28 +22,28 @@ public class Main {
             for (Manager manager : managers){
                 if (manager.getEmail().equals(username)){
                     if (manager.getPassword().equals(password)){
-                        Controller controller = new ManagerController(manager.getEmail());
+                        controller = new ManagerController(manager.getEmail());
                     }
                 }
             }
             for (Employee employee : employees){
                 if (employee.getEmail().equals(username)){
                     if (employee.getPassword().equals(password)){
-                        Controller controller = new EmployeeController(employee.getEmail());
+                        controller = new EmployeeController(employee.getEmail());
                     }
                 }
             }
             for (Mentor mentor : mentors){
                 if (mentor.getEmail().equals(username)){
                     if (mentor.getPassword().equals(password)){
-                        Controller controller = new MentorController(mentor.getEmail());
+                        controller = new MentorController(mentor.getEmail());
                     }
                 }
             }
             for (Student student : students){
                 if (student.getEmail().equals(username)){
                     if (student.getPassword().equals(password)){
-                        Controller controller = new StudentController(student.getEmail());
+                        controller = new StudentController(student.getEmail());
                     }
                 }
             }

@@ -6,7 +6,7 @@ import java.util.Map;
 public class Student extends User{
     private Map<String,String> assignments;
 
-    public Student (String email, String password, String name, String surname, HashMap<String, String> assignments){
+    public Student (String email, String password, String name, String surname, Map<String, String> assignments){
         setEmail(email);
         setPassword(password);
         setName(name);

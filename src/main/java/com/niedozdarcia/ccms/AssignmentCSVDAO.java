@@ -7,7 +7,7 @@ public class AssignmentCSVDAO extends CSVHandler implements AssignmentDAO{
     private List<String> assignments;
 
     public AssignmentCSVDAO() {
-        setFilePath(HandleCsv.class.getResource("/users/assignments.csv").getPath());
+        setFilePath(AssignmentCSVDAO.class.getResource("/users/assignments.csv").getPath());
         load();
         prepareData();
     }
