@@ -11,7 +11,7 @@ public class MentorsCSVDAO extends  CSVHandler {
     public MentorsCSVDAO() {
         StudentCSVDAO studentsDao = new StudentCSVDAO();
         AssignmentCSVDAO assignmentDAO = new AssignmentCSVDAO();
-        setFilePath(HandleCsv.class.getResource("/users/mentors.csv").getPath());
+        setFilePath(MentorsCSVDAO.class.getResource("/users/mentors.csv").getPath());
         students = studentsDao.getStudents();
         assignments = assignmentDAO.getAssignments();
         load();
