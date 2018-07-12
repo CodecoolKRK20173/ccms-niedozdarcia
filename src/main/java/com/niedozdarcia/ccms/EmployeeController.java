@@ -6,9 +6,12 @@ public class EmployeeController implements Controller {
 
     private Employee employee;
     private View view;
+    private EmployessCSVDAO employeesDAO;
 
     public EmployeeController(String email) {
-        List<Employee> employees = new EmployessCSVDAO().getEmployees();
+        employeesDAO = new EmployessCSVDAO();
+
+        List<Employee> employees = employeesDAO.getEmployees();
 
         for (Employee employee : employees) {
             if (employee.getEmail().equals(email)) {
@@ -42,6 +45,7 @@ public class EmployeeController implements Controller {
             switch (choice) {
                 case 0:
                     isFinish = true;
+                    employeesDAO.save();
                     break;
 
                 case 1:

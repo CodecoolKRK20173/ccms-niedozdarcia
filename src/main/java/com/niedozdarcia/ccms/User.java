@@ -5,7 +5,6 @@ public abstract class User{
     private String password;
     private String name;
     private String surname;
-    private View view;
 
     public String getEmail() {
         return email;
@@ -38,9 +37,5 @@ public abstract class User{
     public void setSurname(String surname) {
         this.surname = surname;
     }
-
-    public void setView(View view) { this.view = view; }
-
-    public View getView() { return this.view; }
 
 }

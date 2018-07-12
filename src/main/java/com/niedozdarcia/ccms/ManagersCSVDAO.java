@@ -18,7 +18,7 @@ public class ManagersCSVDAO extends  CSVHandler{
         MentorsCSVDAO mentorsCSVDAO = new MentorsCSVDAO();
         EmployessCSVDAO employessCSVDAO = new EmployessCSVDAO();
         AssignmentCSVDAO assignmentCSVDAO = new AssignmentCSVDAO();
-        setFilePath(ManagersCSVDAO.class.getResource("/users/mentors.csv").getPath());
+        setFilePath(ManagersCSVDAO.class.getResource("/users/managers.csv").getPath());
         students = studentsDao.getStudents();
         mentors = mentorsCSVDAO.getMentors();
         employees = employessCSVDAO.getEmployees();

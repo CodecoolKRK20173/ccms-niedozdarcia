@@ -7,9 +7,12 @@ public class StudentController implements Controller {
 
     private Student student;
     private View view;
+    private StudentCSVDAO studentDAO;
 
     public StudentController(String email) {
-        List<Student> students = new StudentCSVDAO().getStudents();
+        studentDAO = new StudentCSVDAO();
+
+        List<Student> students = studentDAO.getStudents();
 
         for (Student student : students) {
             if (student.getEmail().equals(email)) {
@@ -64,6 +67,7 @@ public class StudentController implements Controller {
             switch (choice) {
                 case 0:
                     isFinish = true;
+                    studentDAO.save();
                     break;
 
                 case 1:

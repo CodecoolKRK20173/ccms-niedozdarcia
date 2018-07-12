@@ -10,10 +10,10 @@ public class Employee extends User {
     private List<Student> students;
 
     public Employee(String email,
-                   String password,
-                   String name,
-                   String surname,
-                   List<Student> students) {
+                    String password,
+                    String name,
+                    String surname,
+                    List<Student> students) {
 
         setEmail(email);
         setPassword(password);
@@ -26,7 +26,7 @@ public class Employee extends User {
         return students;
     }
 
-    public Student getStudent(int index) {
+    public User getStudent(int index) {
         return students.get(index);
     }
 

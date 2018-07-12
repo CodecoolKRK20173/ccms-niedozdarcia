@@ -4,11 +4,14 @@ import java.util.List;
 
 public class ManagerController implements Controller {
 
-    Manager manager;
-    View view;
+    private Manager manager;
+    private View view;
+    private ManagersCSVDAO managersDAO;
     
     public ManagerController(String email) {
-        List<Manager> managers = new ManagersCSVDAO().getManagers();
+        managersDAO = new ManagersCSVDAO();
+
+        List<Manager> managers = managersDAO.getManagers();
 
         for (Manager manager : managers) {
             if (manager.getEmail().equals(email)) {
@@ -24,11 +27,11 @@ public class ManagerController implements Controller {
         String password = view.getInputString("Enter password: ");
         String name = view.getInputString("Enter name: ");
         String surname = view.getInputString("Enter surname: ");
-        manager.getMentors().add(new Mentor(email, password, name, surname, manager.getStudents(), manager.getAssignments()));
+        manager.getMentors().add(new Mentor(email, password, name, surname, manager.getStudents(), manager.getAssigments()));
     }
 
 
-    private void addEmpoloyee() {
+    private void addEmployee() {
         String email = view.getInputString("Enter email: ");
         String password = view.getInputString("Enter password: ");
         String name = view.getInputString("Enter name: ");
@@ -37,7 +40,7 @@ public class ManagerController implements Controller {
     }
 
 
-    private void showUsers(List<User> users) {
+    private void showUsers(List<? extends User> users) {
         for (int index = 0; index < users.size(); index++) {
             view.print(String.format("%d. %s %s: %s\n",
                     ++index,
@@ -81,7 +84,7 @@ public class ManagerController implements Controller {
     }
 
 
-    private void editData(List<User> users) {
+    private void editData(List<? extends User> users) {
         view.print("Enter index of person who you want to edit: ");
         int index = view.getInputInt(1, users.size());
 
@@ -98,6 +101,7 @@ public class ManagerController implements Controller {
             switch (choice) {
                 case 0:
                     isFinish = true;
+                    managersDAO.save();
                     break;
 
                 case 1:
@@ -162,6 +166,7 @@ public class ManagerController implements Controller {
             switch (choice) {
                 case 0:
                     isFinish = true;
+                    managersDAO.save();
                     break;
 
                 case 1:
@@ -181,7 +186,7 @@ public class ManagerController implements Controller {
                     break;
 
                 case 5:
-                    addEmpoloyee();
+                    addEmployee();
                     break;
 
                 case 6:

@@ -31,7 +31,7 @@ public class Manager extends User {
     }
 
 
-    public List<User> getMentors() {
+    public List<Mentor> getMentors() {
         return mentors;
     }
 
@@ -42,25 +42,25 @@ public class Manager extends User {
 
 
 
-    public List<User> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
 
 
-    public List<User> getEmployees() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 
-    public Mentor getMentor(int index) {
+    public User getMentor(int index) {
         return mentors.get(index);
     }
 
-    public Student getStudent(int index) {
+    public User getStudent(int index) {
         return students.get(index);
     }
 
-    public Employee getEmployee(int index) {
+    public User getEmployee(int index) {
         return employees.get(index);
     }
 }

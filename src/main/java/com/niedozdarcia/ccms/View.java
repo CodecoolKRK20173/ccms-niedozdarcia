@@ -43,11 +43,11 @@ public class View {
 
         System.out.println("What would you like to do: ");
 
-        for (int i=0; i<items.length; i++) {
-            System.out.printf("    (%d) %s", i, items[i]);
+        for (int i=1; i<items.length; i++) {
+            System.out.printf("    (%d) %s\n", i, items[i]);
             i++;
         }
 
-        System.out.printf("    (0)%s", items[0]);
+        System.out.printf("    (0) %s\n", items[0]);
     }
 }
