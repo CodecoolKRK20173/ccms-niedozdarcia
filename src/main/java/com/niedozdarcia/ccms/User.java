@@ -43,5 +43,4 @@ public abstract class User{
 
     public View getView() { return this.view; }
 
-    public abstract void activate(View view);
 }
