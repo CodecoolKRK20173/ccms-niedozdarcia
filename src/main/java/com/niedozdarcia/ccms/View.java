@@ -15,20 +15,23 @@ public class View {
         return scanner.nextLine();
     }
 
-    public int getInputInt(String text) {
-        System.out.print(text);
-        int input = -1;
-
-
-        while (input < 0) {
-
-            try {
+    public int getInputInt(int start, int end) {
+        System.out.printf("Enter a number from %d to %d: ", start, end);
+        boolean isCorrect = false;
+        int input = 0;
+        while(!isCorrect) {
+            try{
                 input = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid parameter");
+
+                if(input  >= start && input <= end) {
+                    isCorrect = true;
+                }else {
+                    System.out.println("This is not a number from given range. Try again!");
+                }
+            }catch(NumberFormatException e) {
+                System.out.println("This is not a number. Try again!");
             }
         }
-
         return input;
     }
 
