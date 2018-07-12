@@ -28,6 +28,7 @@ public abstract class CSVHandler {
     }
 
     public void save(){
+                prepareDataToSave();
                 try {
                     Writer writer = Files.newBufferedWriter(Paths.get(filePath));
 
@@ -67,8 +68,8 @@ public abstract class CSVHandler {
         return recordToSave;
     }
 
-    public void setRecordToSave(ArrayList<String[]> recordToSave) {
-        this.recordToSave = recordToSave;
+    public void addRecordToSave(String[] recordToSave) {
+        this.recordToSave.add(recordToSave);
     }
 
     public abstract void prepareDataToSave();

@@ -10,6 +10,11 @@ public class StudentCSVDAO extends  CSVHandler{
     public StudentCSVDAO(){
         setFilePath(HandleCsv.class.getResource("/users/students.csv").getPath());
         load();
+        prepareData();
+    }
+
+    public List<Student> getStudents() {
+        return students;
     }
 
     public void prepareData(){
@@ -30,19 +35,18 @@ public class StudentCSVDAO extends  CSVHandler{
     }
 
     public void prepareDataToSave(){
-        ArrayList<String[]> preparedData = new ArrayList<>();
         for (Student student : students){
-            String[] preparedString = new String[4 + Student.getAssignments().size()];
+            String[] preparedString = new String[4 + student.getAssignments().size()];
             preparedString[0] = student.getEmail();
             preparedString[1] = student.getPassword();
             preparedString[2] = student.getName();
             preparedString[3] = student.getSurname();
             int i = 4;
-            for (String assignment : Student.getAssignments()){
-                preparedString[i] = assignment;
+            for (String assignment : student.getAssignments().keySet()){
+                preparedString[i] = assignment + student.getAssignments().get(assignment);
                 i++;
             }
-            preparedData.add(preparedString);
+            addRecordToSave(preparedString);
         }
     }
 }
