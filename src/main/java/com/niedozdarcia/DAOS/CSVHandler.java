@@ -1,4 +1,4 @@
-package com.niedozdarcia.ccms;
+package com.niedozdarcia.DAOS;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CSVHandler {
+public abstract class CSVHandler implements DataBaseHandler {
     private List<String[]> records;
     private String filePath;
     private ArrayList<String[]> recordToSave;

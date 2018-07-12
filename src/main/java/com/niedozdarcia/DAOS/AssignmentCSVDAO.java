@@ -1,9 +1,11 @@
-package com.niedozdarcia.ccms;
+package com.niedozdarcia.DAOS;
+
+import com.niedozdarcia.ccms.HandleCsv;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AssignmentCSVDAO extends CSVHandler {
+public class AssignmentCSVDAO extends CSVHandler implements AssignmentDAO{
     private List<String> assignments;
 
     public AssignmentCSVDAO() {

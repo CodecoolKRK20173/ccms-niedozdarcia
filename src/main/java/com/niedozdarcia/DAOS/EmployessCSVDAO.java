@@ -1,4 +1,8 @@
-package com.niedozdarcia.ccms;
+package com.niedozdarcia.DAOS;
+
+import com.niedozdarcia.ccms.Employee;
+import com.niedozdarcia.ccms.HandleCsv;
+import com.niedozdarcia.ccms.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +10,10 @@ import java.util.List;
 public class EmployessCSVDAO extends  CSVHandler{
     private List<Employee> employees;
     private List<Student> students;
-    private StudentCSVDAO studentsDao = new StudentCSVDAO();
 
     public EmployessCSVDAO() {
         setFilePath(HandleCsv.class.getResource("/users/mentors.csv").getPath());
+        StudentCSVDAO studentsDao = new StudentCSVDAO();
         students = studentsDao.getStudents();
         load();
         prepareData();
@@ -33,7 +37,7 @@ public class EmployessCSVDAO extends  CSVHandler{
         }
     }
 
-    public List<Employee> getMentors() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 }
