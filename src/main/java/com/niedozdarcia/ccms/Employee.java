@@ -25,7 +25,7 @@ public class Employee extends User {
         String studentsTable = "";
         for (int index = 0; i < students.size(); index++) {
             usersTable += String.format("%d. %s %s: %s\n", ++index, students.get(index).getName());
-            students.get(index).getSurname(), students.get(index).getEmail());
+            students.get(index).getSurname(), students.get(index).getEmail();
         }
         getView().print(studentsTable);
     }
